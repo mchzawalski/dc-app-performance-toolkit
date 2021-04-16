@@ -1,0 +1,6 @@
+venv\Scripts\activate
+cd app
+python util/jmeter/start_jmeter_ui.py --app jira
+
+project = AAAAAAAAA and !("Epic Link" = AAAAAAAAA-1 or key = AAAAAAAAA-1) ORDER BY created ASC
+project = AAAAAAAAA and issuekey != "AAAAAAAAA-1" and issuetype = epic ORDER BY created ASC

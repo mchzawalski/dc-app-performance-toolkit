@@ -9248,20 +9248,28 @@ vars.put(&quot;random_page&quot;, String.valueOf(random_page));</stringProp>
             <stringProp name="ThroughputController.percentThroughput">${perc_standalone_extension}</stringProp>
           </ThroughputController>
           <hashTree>
-            <TransactionController guiclass="TransactionControllerGui" testclass="TransactionController" testname="jmeter_app_specific_action" enabled="true">
+            <TransactionController guiclass="TransactionControllerGui" testclass="TransactionController" testname="jmeter_app_specific_action_clone_template_load" enabled="true">
               <boolProp name="TransactionController.includeTimers">false</boolProp>
               <boolProp name="TransactionController.parent">true</boolProp>
             </TransactionController>
             <hashTree>
-              <HTTPSamplerProxy guiclass="HttpTestSampleGui" testclass="HTTPSamplerProxy" testname="GET /app/get_endpoing" enabled="true">
+              <HTTPSamplerProxy guiclass="HttpTestSampleGui" testclass="HTTPSamplerProxy" testname="/secure/TemplateClonerAction!default.jspa-543" enabled="true">
                 <elementProp name="HTTPsampler.Arguments" elementType="Arguments" guiclass="HTTPArgumentsPanel" testclass="Arguments" enabled="true">
-                  <collectionProp name="Arguments.arguments"/>
+                  <collectionProp name="Arguments.arguments">
+                    <elementProp name="id" elementType="HTTPArgument">
+                      <boolProp name="HTTPArgument.always_encode">false</boolProp>
+                      <stringProp name="Argument.name">id</stringProp>
+                      <stringProp name="Argument.value">2014039</stringProp>
+                      <stringProp name="Argument.metadata">=</stringProp>
+                      <boolProp name="HTTPArgument.use_equals">true</boolProp>
+                    </elementProp>
+                  </collectionProp>
                 </elementProp>
                 <stringProp name="HTTPSampler.domain"></stringProp>
                 <stringProp name="HTTPSampler.port"></stringProp>
                 <stringProp name="HTTPSampler.protocol"></stringProp>
-                <stringProp name="HTTPSampler.contentEncoding"></stringProp>
-                <stringProp name="HTTPSampler.path">${application.postfix}/app/get_endpoint</stringProp>
+                <stringProp name="HTTPSampler.contentEncoding">UTF-8</stringProp>
+                <stringProp name="HTTPSampler.path">${application.postfix}/secure/TemplateClonerAction!default.jspa</stringProp>
                 <stringProp name="HTTPSampler.method">GET</stringProp>
                 <boolProp name="HTTPSampler.follow_redirects">true</boolProp>
                 <boolProp name="HTTPSampler.auto_redirects">false</boolProp>
@@ -9272,59 +9280,44 @@ vars.put(&quot;random_page&quot;, String.valueOf(random_page));</stringProp>
                 <stringProp name="HTTPSampler.response_timeout"></stringProp>
               </HTTPSamplerProxy>
               <hashTree>
-                <RegexExtractor guiclass="RegexExtractorGui" testclass="RegexExtractor" testname="app_id" enabled="true">
-                  <stringProp name="RegexExtractor.useHeaders">false</stringProp>
-                  <stringProp name="RegexExtractor.refname">app_id</stringProp>
-                  <stringProp name="RegexExtractor.regex">&quot;id&quot;:&quot;(.+?)&quot;</stringProp>
-                  <stringProp name="RegexExtractor.template">$1$</stringProp>
-                  <stringProp name="RegexExtractor.default">NOT FOUND</stringProp>
-                  <stringProp name="RegexExtractor.match_number">1</stringProp>
-                </RegexExtractor>
-                <hashTree/>
-                <RegexExtractor guiclass="RegexExtractorGui" testclass="RegexExtractor" testname="app_token" enabled="true">
-                  <stringProp name="RegexExtractor.useHeaders">false</stringProp>
-                  <stringProp name="RegexExtractor.refname">app_token</stringProp>
-                  <stringProp name="RegexExtractor.regex">&quot;token&quot;:&quot;(.+?)&quot;</stringProp>
-                  <stringProp name="RegexExtractor.template">$1$</stringProp>
-                  <stringProp name="RegexExtractor.default">NOT FOUND</stringProp>
-                  <stringProp name="RegexExtractor.match_number">1</stringProp>
-                </RegexExtractor>
-                <hashTree/>
-                <ResponseAssertion guiclass="AssertionGui" testclass="ResponseAssertion" testname="assertion after GET request" enabled="true">
-                  <collectionProp name="Asserion.test_strings">
-                    <stringProp name="261585815">asserttion string</stringProp>
+                <HeaderManager guiclass="HeaderPanel" testclass="HeaderManager" testname="HTTP Header Manager" enabled="true">
+                  <collectionProp name="HeaderManager.headers">
+                    <elementProp name="Accept-Language" elementType="Header">
+                      <stringProp name="Header.name">Accept-Language</stringProp>
+                      <stringProp name="Header.value">en-US,en;q=0.5</stringProp>
+                    </elementProp>
+                    <elementProp name="Upgrade-Insecure-Requests" elementType="Header">
+                      <stringProp name="Header.name">Upgrade-Insecure-Requests</stringProp>
+                      <stringProp name="Header.value">1</stringProp>
+                    </elementProp>
+                    <elementProp name="Accept-Encoding" elementType="Header">
+                      <stringProp name="Header.name">Accept-Encoding</stringProp>
+                      <stringProp name="Header.value">gzip, deflate</stringProp>
+                    </elementProp>
+                    <elementProp name="Accept" elementType="Header">
+                      <stringProp name="Header.name">Accept</stringProp>
+                      <stringProp name="Header.value">text/html,application/xhtml+xml,application/xml;q=0.9,*/*;q=0.8</stringProp>
+                    </elementProp>
                   </collectionProp>
-                  <stringProp name="Assertion.custom_message"></stringProp>
-                  <stringProp name="Assertion.test_field">Assertion.response_data</stringProp>
-                  <boolProp name="Assertion.assume_success">false</boolProp>
-                  <intProp name="Assertion.test_type">16</intProp>
-                </ResponseAssertion>
+                </HeaderManager>
                 <hashTree/>
               </hashTree>
-              <HTTPSamplerProxy guiclass="HttpTestSampleGui" testclass="HTTPSamplerProxy" testname="POST /app/post_endpoing" enabled="true">
-                <elementProp name="HTTPsampler.Arguments" elementType="Arguments" guiclass="HTTPArgumentsPanel" testclass="Arguments" enabled="true">
+              <HTTPSamplerProxy guiclass="HttpTestSampleGui" testclass="HTTPSamplerProxy" testname="/rest/webResources/1.0/resources-545" enabled="true">
+                <boolProp name="HTTPSampler.postBodyRaw">true</boolProp>
+                <elementProp name="HTTPsampler.Arguments" elementType="Arguments">
                   <collectionProp name="Arguments.arguments">
-                    <elementProp name="id" elementType="HTTPArgument">
+                    <elementProp name="" elementType="HTTPArgument">
                       <boolProp name="HTTPArgument.always_encode">false</boolProp>
-                      <stringProp name="Argument.value">${app_id}</stringProp>
+                      <stringProp name="Argument.value">{&quot;r&quot;:[],&quot;c&quot;:[&quot;browser-metrics-plugin.contrib&quot;],&quot;xc&quot;:[&quot;_super&quot;,&quot;atl.general&quot;,&quot;jira.global&quot;,&quot;jira.edit.issue&quot;],&quot;xr&quot;:[&quot;com.atlassian.jira.jira-tzdetect-plugin:tzdetect-banner-component&quot;,&quot;com.atlassian.auiplugin:split_aui.component.form.date-select&quot;,&quot;com.atlassian.auiplugin:split_aui.component.form.select2&quot;,&quot;com.atlassian.auiplugin:split_aui.component.expander&quot;,&quot;com.atlassian.auiplugin:split_aui.component.dialog2&quot;,&quot;com.vilisoft.jira.plugins.template-cloner:template-cloner-resources&quot;]}</stringProp>
                       <stringProp name="Argument.metadata">=</stringProp>
-                      <boolProp name="HTTPArgument.use_equals">true</boolProp>
-                      <stringProp name="Argument.name">id</stringProp>
-                    </elementProp>
-                    <elementProp name="token" elementType="HTTPArgument">
-                      <boolProp name="HTTPArgument.always_encode">false</boolProp>
-                      <stringProp name="Argument.value">${app_token}</stringProp>
-                      <stringProp name="Argument.metadata">=</stringProp>
-                      <boolProp name="HTTPArgument.use_equals">true</boolProp>
-                      <stringProp name="Argument.name">token</stringProp>
                     </elementProp>
                   </collectionProp>
                 </elementProp>
                 <stringProp name="HTTPSampler.domain"></stringProp>
                 <stringProp name="HTTPSampler.port"></stringProp>
                 <stringProp name="HTTPSampler.protocol"></stringProp>
-                <stringProp name="HTTPSampler.contentEncoding"></stringProp>
-                <stringProp name="HTTPSampler.path">${application.postfix}/app/post_endpoint</stringProp>
+                <stringProp name="HTTPSampler.contentEncoding">UTF-8</stringProp>
+                <stringProp name="HTTPSampler.path">${application.postfix}/rest/webResources/1.0/resources</stringProp>
                 <stringProp name="HTTPSampler.method">POST</stringProp>
                 <boolProp name="HTTPSampler.follow_redirects">true</boolProp>
                 <boolProp name="HTTPSampler.auto_redirects">false</boolProp>
@@ -9335,15 +9328,192 @@ vars.put(&quot;random_page&quot;, String.valueOf(random_page));</stringProp>
                 <stringProp name="HTTPSampler.response_timeout"></stringProp>
               </HTTPSamplerProxy>
               <hashTree>
-                <ResponseAssertion guiclass="AssertionGui" testclass="ResponseAssertion" testname="assertion after POST request" enabled="true">
-                  <collectionProp name="Asserion.test_strings">
-                    <stringProp name="-787535121">assertion string</stringProp>
+                <HeaderManager guiclass="HeaderPanel" testclass="HeaderManager" testname="HTTP Header Manager" enabled="true">
+                  <collectionProp name="HeaderManager.headers">
+                    <elementProp name="Accept-Language" elementType="Header">
+                      <stringProp name="Header.name">Accept-Language</stringProp>
+                      <stringProp name="Header.value">en-US,en;q=0.5</stringProp>
+                    </elementProp>
+                    <elementProp name="X-Requested-With" elementType="Header">
+                      <stringProp name="Header.name">X-Requested-With</stringProp>
+                      <stringProp name="Header.value">XMLHttpRequest</stringProp>
+                    </elementProp>
+                    <elementProp name="Content-Type" elementType="Header">
+                      <stringProp name="Header.name">Content-Type</stringProp>
+                      <stringProp name="Header.value">application/json</stringProp>
+                    </elementProp>
+                    <elementProp name="Accept-Encoding" elementType="Header">
+                      <stringProp name="Header.name">Accept-Encoding</stringProp>
+                      <stringProp name="Header.value">gzip, deflate</stringProp>
+                    </elementProp>
+                    <elementProp name="Accept" elementType="Header">
+                      <stringProp name="Header.name">Accept</stringProp>
+                      <stringProp name="Header.value">application/json, text/javascript, */*; q=0.01</stringProp>
+                    </elementProp>
                   </collectionProp>
-                  <stringProp name="Assertion.custom_message"></stringProp>
-                  <stringProp name="Assertion.test_field">Assertion.response_data</stringProp>
-                  <boolProp name="Assertion.assume_success">false</boolProp>
-                  <intProp name="Assertion.test_type">16</intProp>
-                </ResponseAssertion>
+                </HeaderManager>
+                <hashTree/>
+              </hashTree>
+              <HTTPSamplerProxy guiclass="HttpTestSampleGui" testclass="HTTPSamplerProxy" testname="/rest/webResources/1.0/resources-548" enabled="true">
+                <boolProp name="HTTPSampler.postBodyRaw">true</boolProp>
+                <elementProp name="HTTPsampler.Arguments" elementType="Arguments">
+                  <collectionProp name="Arguments.arguments">
+                    <elementProp name="" elementType="HTTPArgument">
+                      <boolProp name="HTTPArgument.always_encode">false</boolProp>
+                      <stringProp name="Argument.value">{&quot;r&quot;:[],&quot;c&quot;:[&quot;jira.webresources:mentions-feature&quot;],&quot;xc&quot;:[&quot;_super&quot;,&quot;atl.general&quot;,&quot;jira.global&quot;,&quot;jira.edit.issue&quot;,&quot;browser-metrics-plugin.contrib&quot;,&quot;atl.global&quot;,&quot;jira.global.look-and-feel&quot;],&quot;xr&quot;:[&quot;com.atlassian.jira.jira-tzdetect-plugin:tzdetect-banner-component&quot;,&quot;com.atlassian.auiplugin:split_aui.component.form.date-select&quot;,&quot;com.atlassian.auiplugin:split_aui.component.form.select2&quot;,&quot;com.atlassian.auiplugin:split_aui.component.expander&quot;,&quot;com.atlassian.auiplugin:split_aui.component.dialog2&quot;,&quot;com.vilisoft.jira.plugins.template-cloner:template-cloner-resources&quot;,&quot;com.atlassian.jira.jira-tzdetect-plugin:tzdetect-lib&quot;,&quot;jira.webresources:calendar-en&quot;,&quot;jira.webresources:calendar-localisation-moment&quot;,&quot;com.atlassian.auiplugin:split_aui.splitchunk.vendors--ec56cc9135&quot;,&quot;com.atlassian.auiplugin:split_aui.page.iconography&quot;,&quot;jira.webresources:bigpipe-js&quot;,&quot;jira.webresources:bigpipe-init&quot;,&quot;whisper.messages:feature-discovery&quot;]}</stringProp>
+                      <stringProp name="Argument.metadata">=</stringProp>
+                    </elementProp>
+                  </collectionProp>
+                </elementProp>
+                <stringProp name="HTTPSampler.domain"></stringProp>
+                <stringProp name="HTTPSampler.port"></stringProp>
+                <stringProp name="HTTPSampler.protocol"></stringProp>
+                <stringProp name="HTTPSampler.contentEncoding">UTF-8</stringProp>
+                <stringProp name="HTTPSampler.path">${application.postfix}/rest/webResources/1.0/resources</stringProp>
+                <stringProp name="HTTPSampler.method">POST</stringProp>
+                <boolProp name="HTTPSampler.follow_redirects">true</boolProp>
+                <boolProp name="HTTPSampler.auto_redirects">false</boolProp>
+                <boolProp name="HTTPSampler.use_keepalive">true</boolProp>
+                <boolProp name="HTTPSampler.DO_MULTIPART_POST">false</boolProp>
+                <stringProp name="HTTPSampler.embedded_url_re"></stringProp>
+                <stringProp name="HTTPSampler.connect_timeout"></stringProp>
+                <stringProp name="HTTPSampler.response_timeout"></stringProp>
+              </HTTPSamplerProxy>
+              <hashTree>
+                <HeaderManager guiclass="HeaderPanel" testclass="HeaderManager" testname="HTTP Header Manager" enabled="true">
+                  <collectionProp name="HeaderManager.headers">
+                    <elementProp name="Accept-Language" elementType="Header">
+                      <stringProp name="Header.name">Accept-Language</stringProp>
+                      <stringProp name="Header.value">en-US,en;q=0.5</stringProp>
+                    </elementProp>
+                    <elementProp name="X-Requested-With" elementType="Header">
+                      <stringProp name="Header.name">X-Requested-With</stringProp>
+                      <stringProp name="Header.value">XMLHttpRequest</stringProp>
+                    </elementProp>
+                    <elementProp name="Content-Type" elementType="Header">
+                      <stringProp name="Header.name">Content-Type</stringProp>
+                      <stringProp name="Header.value">application/json</stringProp>
+                    </elementProp>
+                    <elementProp name="Accept-Encoding" elementType="Header">
+                      <stringProp name="Header.name">Accept-Encoding</stringProp>
+                      <stringProp name="Header.value">gzip, deflate</stringProp>
+                    </elementProp>
+                    <elementProp name="Accept" elementType="Header">
+                      <stringProp name="Header.name">Accept</stringProp>
+                      <stringProp name="Header.value">application/json, text/javascript, */*; q=0.01</stringProp>
+                    </elementProp>
+                  </collectionProp>
+                </HeaderManager>
+                <hashTree/>
+              </hashTree>
+              <HTTPSamplerProxy guiclass="HttpTestSampleGui" testclass="HTTPSamplerProxy" testname="/rest/webResources/1.0/resources-550" enabled="true">
+                <boolProp name="HTTPSampler.postBodyRaw">true</boolProp>
+                <elementProp name="HTTPsampler.Arguments" elementType="Arguments">
+                  <collectionProp name="Arguments.arguments">
+                    <elementProp name="" elementType="HTTPArgument">
+                      <boolProp name="HTTPArgument.always_encode">false</boolProp>
+                      <stringProp name="Argument.value">{&quot;r&quot;:[&quot;com.atlassian.jira.jira-header-plugin:newsletter-signup-tip&quot;,&quot;com.atlassian.whisper.atlassian-whisper-plugin:atlassian-whisper-hermes&quot;],&quot;c&quot;:[&quot;jira.rich.editor.api&quot;,&quot;jira.rich.editor&quot;],&quot;xc&quot;:[&quot;_super&quot;,&quot;atl.general&quot;,&quot;jira.global&quot;,&quot;jira.edit.issue&quot;,&quot;browser-metrics-plugin.contrib&quot;,&quot;atl.global&quot;,&quot;jira.global.look-and-feel&quot;],&quot;xr&quot;:[&quot;com.atlassian.jira.jira-tzdetect-plugin:tzdetect-banner-component&quot;,&quot;com.atlassian.auiplugin:split_aui.component.form.date-select&quot;,&quot;com.atlassian.auiplugin:split_aui.component.form.select2&quot;,&quot;com.atlassian.auiplugin:split_aui.component.expander&quot;,&quot;com.atlassian.auiplugin:split_aui.component.dialog2&quot;,&quot;com.vilisoft.jira.plugins.template-cloner:template-cloner-resources&quot;,&quot;com.atlassian.jira.jira-tzdetect-plugin:tzdetect-lib&quot;,&quot;jira.webresources:calendar-en&quot;,&quot;jira.webresources:calendar-localisation-moment&quot;,&quot;com.atlassian.auiplugin:split_aui.splitchunk.vendors--ec56cc9135&quot;,&quot;com.atlassian.auiplugin:split_aui.page.iconography&quot;,&quot;jira.webresources:bigpipe-js&quot;,&quot;jira.webresources:bigpipe-init&quot;,&quot;whisper.messages:feature-discovery&quot;]}</stringProp>
+                      <stringProp name="Argument.metadata">=</stringProp>
+                    </elementProp>
+                  </collectionProp>
+                </elementProp>
+                <stringProp name="HTTPSampler.domain"></stringProp>
+                <stringProp name="HTTPSampler.port"></stringProp>
+                <stringProp name="HTTPSampler.protocol"></stringProp>
+                <stringProp name="HTTPSampler.contentEncoding">UTF-8</stringProp>
+                <stringProp name="HTTPSampler.path">${application.postfix}/rest/webResources/1.0/resources</stringProp>
+                <stringProp name="HTTPSampler.method">POST</stringProp>
+                <boolProp name="HTTPSampler.follow_redirects">true</boolProp>
+                <boolProp name="HTTPSampler.auto_redirects">false</boolProp>
+                <boolProp name="HTTPSampler.use_keepalive">true</boolProp>
+                <boolProp name="HTTPSampler.DO_MULTIPART_POST">false</boolProp>
+                <stringProp name="HTTPSampler.embedded_url_re"></stringProp>
+                <stringProp name="HTTPSampler.connect_timeout"></stringProp>
+                <stringProp name="HTTPSampler.response_timeout"></stringProp>
+              </HTTPSamplerProxy>
+              <hashTree>
+                <HeaderManager guiclass="HeaderPanel" testclass="HeaderManager" testname="HTTP Header Manager" enabled="true">
+                  <collectionProp name="HeaderManager.headers">
+                    <elementProp name="Accept-Language" elementType="Header">
+                      <stringProp name="Header.name">Accept-Language</stringProp>
+                      <stringProp name="Header.value">en-US,en;q=0.5</stringProp>
+                    </elementProp>
+                    <elementProp name="X-Requested-With" elementType="Header">
+                      <stringProp name="Header.name">X-Requested-With</stringProp>
+                      <stringProp name="Header.value">XMLHttpRequest</stringProp>
+                    </elementProp>
+                    <elementProp name="Content-Type" elementType="Header">
+                      <stringProp name="Header.name">Content-Type</stringProp>
+                      <stringProp name="Header.value">application/json</stringProp>
+                    </elementProp>
+                    <elementProp name="Accept-Encoding" elementType="Header">
+                      <stringProp name="Header.name">Accept-Encoding</stringProp>
+                      <stringProp name="Header.value">gzip, deflate</stringProp>
+                    </elementProp>
+                    <elementProp name="Accept" elementType="Header">
+                      <stringProp name="Header.name">Accept</stringProp>
+                      <stringProp name="Header.value">application/json, text/javascript, */*; q=0.01</stringProp>
+                    </elementProp>
+                  </collectionProp>
+                </HeaderManager>
+                <hashTree/>
+              </hashTree>
+            </hashTree>
+            <TransactionController guiclass="TransactionControllerGui" testclass="TransactionController" testname="jmeter_app_specific_action_clone_template_submit" enabled="true">
+              <boolProp name="TransactionController.includeTimers">false</boolProp>
+              <boolProp name="TransactionController.parent">true</boolProp>
+            </TransactionController>
+            <hashTree>
+              <HTTPSamplerProxy guiclass="HttpTestSampleGui" testclass="HTTPSamplerProxy" testname="/rest/template-cloner/1.0/clone-template/10500-554" enabled="true">
+                <boolProp name="HTTPSampler.postBodyRaw">true</boolProp>
+                <elementProp name="HTTPsampler.Arguments" elementType="Arguments">
+                  <collectionProp name="Arguments.arguments">
+                    <elementProp name="" elementType="HTTPArgument">
+                      <boolProp name="HTTPArgument.always_encode">false</boolProp>
+                      <stringProp name="Argument.value">{&quot;epicData&quot;:{&quot;id&quot;:&quot;2014039&quot;,&quot;projectId&quot;:&quot;10500&quot;,&quot;epicName&quot;:&quot;Test epic name&quot;,&quot;summary&quot;:&quot;Test epic summary 5&quot;,&quot;description&quot;:&quot;&quot;,&quot;assignee&quot;:&quot;&quot;,&quot;dueDate&quot;:&quot;&quot;,&quot;fixVersions&quot;:null},&quot;cloneSettingsData&quot;:{&quot;copyAttachments&quot;:false,&quot;copyComments&quot;:false,&quot;copySubTasks&quot;:false,&quot;copyWatchers&quot;:false,&quot;copyLinks&quot;:false,&quot;linkedIssuesCloneStrategy&quot;:&quot;1&quot;},&quot;issuesData&quot;:[{&quot;id&quot;:&quot;2014040&quot;,&quot;issueTypeId&quot;:&quot;10332&quot;,&quot;selected&quot;:true,&quot;priority&quot;:&quot;3&quot;,&quot;summary&quot;:&quot;Test task 1&quot;,&quot;description&quot;:&quot;&quot;,&quot;assignee&quot;:&quot;&quot;,&quot;dueDate&quot;:&quot;&quot;,&quot;estimate&quot;:&quot;&quot;,&quot;fixVersions&quot;:null,&quot;customFields&quot;:[]},{&quot;id&quot;:&quot;2014041&quot;,&quot;issueTypeId&quot;:&quot;10332&quot;,&quot;selected&quot;:true,&quot;priority&quot;:&quot;3&quot;,&quot;summary&quot;:&quot;Test task 2&quot;,&quot;description&quot;:&quot;&quot;,&quot;assignee&quot;:&quot;&quot;,&quot;dueDate&quot;:&quot;&quot;,&quot;estimate&quot;:&quot;&quot;,&quot;fixVersions&quot;:null,&quot;customFields&quot;:[]},{&quot;id&quot;:&quot;2014042&quot;,&quot;issueTypeId&quot;:&quot;10001&quot;,&quot;selected&quot;:true,&quot;priority&quot;:&quot;3&quot;,&quot;summary&quot;:&quot;Test story 1&quot;,&quot;description&quot;:&quot;&quot;,&quot;assignee&quot;:&quot;&quot;,&quot;dueDate&quot;:&quot;&quot;,&quot;estimate&quot;:&quot;&quot;,&quot;fixVersions&quot;:null,&quot;customFields&quot;:[]},{&quot;id&quot;:&quot;2014043&quot;,&quot;issueTypeId&quot;:&quot;10001&quot;,&quot;selected&quot;:true,&quot;priority&quot;:&quot;3&quot;,&quot;summary&quot;:&quot;Test story 2&quot;,&quot;description&quot;:&quot;&quot;,&quot;assignee&quot;:&quot;&quot;,&quot;dueDate&quot;:&quot;&quot;,&quot;estimate&quot;:&quot;&quot;,&quot;fixVersions&quot;:null,&quot;customFields&quot;:[]},{&quot;id&quot;:&quot;2014044&quot;,&quot;issueTypeId&quot;:&quot;10334&quot;,&quot;selected&quot;:true,&quot;priority&quot;:&quot;3&quot;,&quot;summary&quot;:&quot;Test bug 1&quot;,&quot;description&quot;:&quot;&quot;,&quot;assignee&quot;:&quot;&quot;,&quot;dueDate&quot;:&quot;&quot;,&quot;estimate&quot;:&quot;&quot;,&quot;fixVersions&quot;:null,&quot;customFields&quot;:[]}],&quot;additionalFields&quot;:null}</stringProp>
+                      <stringProp name="Argument.metadata">=</stringProp>
+                    </elementProp>
+                  </collectionProp>
+                </elementProp>
+                <stringProp name="HTTPSampler.domain"></stringProp>
+                <stringProp name="HTTPSampler.port"></stringProp>
+                <stringProp name="HTTPSampler.protocol"></stringProp>
+                <stringProp name="HTTPSampler.contentEncoding">UTF-8</stringProp>
+                <stringProp name="HTTPSampler.path">${application.postfix}/rest/template-cloner/1.0/clone-template/10500</stringProp>
+                <stringProp name="HTTPSampler.method">POST</stringProp>
+                <boolProp name="HTTPSampler.follow_redirects">true</boolProp>
+                <boolProp name="HTTPSampler.auto_redirects">false</boolProp>
+                <boolProp name="HTTPSampler.use_keepalive">true</boolProp>
+                <boolProp name="HTTPSampler.DO_MULTIPART_POST">false</boolProp>
+                <stringProp name="HTTPSampler.embedded_url_re"></stringProp>
+                <stringProp name="HTTPSampler.connect_timeout"></stringProp>
+                <stringProp name="HTTPSampler.response_timeout"></stringProp>
+              </HTTPSamplerProxy>
+              <hashTree>
+                <HeaderManager guiclass="HeaderPanel" testclass="HeaderManager" testname="HTTP Header Manager" enabled="true">
+                  <collectionProp name="HeaderManager.headers">
+                    <elementProp name="Accept-Language" elementType="Header">
+                      <stringProp name="Header.name">Accept-Language</stringProp>
+                      <stringProp name="Header.value">en-US,en;q=0.5</stringProp>
+                    </elementProp>
+                    <elementProp name="X-Requested-With" elementType="Header">
+                      <stringProp name="Header.name">X-Requested-With</stringProp>
+                      <stringProp name="Header.value">XMLHttpRequest</stringProp>
+                    </elementProp>
+                    <elementProp name="Content-Type" elementType="Header">
+                      <stringProp name="Header.name">Content-Type</stringProp>
+                      <stringProp name="Header.value">application/json</stringProp>
+                    </elementProp>
+                    <elementProp name="Accept-Encoding" elementType="Header">
+                      <stringProp name="Header.name">Accept-Encoding</stringProp>
+                      <stringProp name="Header.value">gzip, deflate</stringProp>
+                    </elementProp>
+                    <elementProp name="Accept" elementType="Header">
+                      <stringProp name="Header.name">Accept</stringProp>
+                      <stringProp name="Header.value">application/json, text/javascript, */*; q=0.01</stringProp>
+                    </elementProp>
+                  </collectionProp>
+                </HeaderManager>
                 <hashTree/>
               </hashTree>
             </hashTree>
